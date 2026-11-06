@@ -20,8 +20,12 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <a href="#inicio" className="shrink-0 rounded-md bg-white px-2 py-1">
-          <Image src="/img/logo.png" alt="D&L Quality Consulting" width={224} height={52} className="h-9 w-auto" priority />
+        <a href="#inicio" className="flex shrink-0 items-center gap-2.5" aria-label="D&L Quality Consulting, inicio">
+          <Image src="/img/icon-light.png" alt="" width={256} height={256} className="logo-on-light size-11" priority />
+          <Image src="/img/icon-dark.png" alt="" width={256} height={256} className="logo-on-dark size-11" priority />
+          <span className="font-display text-lg font-bold leading-tight">
+            D&amp;L <span className="block text-sm font-semibold text-muted-foreground">Quality Consulting</span>
+          </span>
         </a>
         <nav aria-label="Principal" className="hidden items-center gap-6 md:flex">
           {NAV.map((n) => (
@@ -221,7 +225,7 @@ function Footer() {
   return (
     <footer className="bg-[var(--graphite)] text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-slate-800 px-5 py-10 md:flex-row md:items-center md:justify-between">
-        <Image src="/img/footer_logo.png" alt="D&L Quality Consulting" width={224} height={52} className="h-9 w-auto" />
+        <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto" />
         <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="hover:text-white">{n.label}</a>
