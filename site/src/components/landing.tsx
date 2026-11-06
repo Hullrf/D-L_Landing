@@ -326,7 +326,7 @@ function Footer() {
   return (
     <footer className="bg-[var(--graphite)] text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-slate-800 px-5 py-10 md:flex-row md:items-center md:justify-between">
-        <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto" />
+        <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto self-start object-contain" />
         <nav aria-label={t.ui.footerNav} className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {t.nav.map((n) => (
             <a key={n.href} href={n.href} className="hover:text-white">{n.label}</a>
