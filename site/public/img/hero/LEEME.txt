@@ -1,0 +1,5 @@
+Suelta aqui las imagenes de fondo de la portada (jpg, png, webp o avif).
+Se usan en orden alfabetico/numerico (1.jpg, 2.jpg, ...), rotan solas cada 6 s.
+Tamano recomendado: 1920x1080 o mayor, peso menor a 400 KB cada una.
+Tras anadirlas hay que volver a compilar (npm run build).
+Sin imagenes aqui, la portada muestra diapositivas de relleno.

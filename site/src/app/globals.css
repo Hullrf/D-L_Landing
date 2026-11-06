@@ -226,3 +226,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
   .marquee-dup { display: none; }
 }
+
+/* ===== Carrusel de fondo de la portada: fundido + zoom lento ===== */
+/* Saliente: conserva el zoom mientras se desvanece y se reinicia ya invisible. Entrante: zoom lento. */
+.hero-slide { opacity: 0; transform: scale(1); transition: opacity 1400ms ease-in-out, transform 0s linear 1400ms; }
+.hero-slide-active { opacity: 1; transform: scale(1.08); transition: opacity 1400ms ease-in-out, transform 9s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide, .hero-slide-active { transform: none; transition: opacity 1400ms ease-in-out; }
+}
