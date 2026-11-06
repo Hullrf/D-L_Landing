@@ -153,8 +153,9 @@
   --font-sans: var(--font-body-face), ui-sans-serif, sans-serif;
   --font-heading: var(--font-heading-face), ui-sans-serif, sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
+/* El script de layout.tsx fija data-theme (guardado o del sistema) antes de pintar */
+:root[data-theme="dark"] {
+  & {
     --background: #0b1220;
     --foreground: #e2e8f0;
     --card: #111b2e;
@@ -170,6 +171,7 @@
     --border: #263247;
     --input: #263247;
     --ring: #fb923c;
+    color-scheme: dark;
   }
 }
 body { font-family: var(--font-sans); }
@@ -197,7 +199,5 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 
 /* Logo del LMS: variante clara u oscura según el esquema de color */
 .logo-on-dark { display: none; }
-@media (prefers-color-scheme: dark) {
-  .logo-on-light { display: none; }
-  .logo-on-dark { display: block; }
-}
+:root[data-theme="dark"] .logo-on-light { display: none; }
+:root[data-theme="dark"] .logo-on-dark { display: block; }
