@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { WaveArt } from "@/components/art";
+import HeroCarousel from "@/components/hero-carousel";
 import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
 import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, WHATSAPP, type Lang } from "@/lib/content";
@@ -105,23 +106,24 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ heroImages }: { heroImages: string[] }) {
   const { t } = usePrefs();
   const btnBrand = `${btn} bg-[var(--brand)] text-[#0f172a] hover:bg-orange-400`;
   const btnGhost = `${btn} border border-slate-500 text-white hover:bg-white/10`;
   return (
     <section id="inicio" className="relative overflow-hidden bg-[var(--graphite)] text-white">
+      <HeroCarousel images={heroImages} />
       <WaveArt className="[mask-image:linear-gradient(to_right,transparent_30%,#000_70%)]" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 pb-24 pt-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:pt-28">
         <div>
           <h1 className="font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">{t.hero.title}</h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">{t.hero.text}</p>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-100">{t.hero.text}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#contacto" className={btnBrand}>{t.hero.cta}</a>
             <a href="#servicios" className={btnGhost}>{t.hero.ctaSecondary}</a>
           </div>
         </div>
-        <aside aria-label={t.hero.normsTitle} className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur-md">
+        <aside aria-label={t.hero.normsTitle} className="rounded-2xl border border-white/10 bg-[#0f172a]/55 p-6 shadow-2xl backdrop-blur-md">
           <p className="font-display text-lg font-semibold">{t.hero.normsTitle}</p>
           <ul className="mt-4 divide-y divide-white/10">
             {t.hero.norms.map((n, i) => (
@@ -339,12 +341,12 @@ function Footer() {
   );
 }
 
-export default function Landing() {
+export default function Landing({ heroImages }: { heroImages: string[] }) {
   return (
     <>
       <Header />
       <main>
-        <Hero />
+        <Hero heroImages={heroImages} />
         <Stats />
         <About />
         <Services />
