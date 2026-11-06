@@ -153,8 +153,9 @@
   --font-sans: var(--font-body-face), ui-sans-serif, sans-serif;
   --font-heading: var(--font-heading-face), ui-sans-serif, sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
+/* El script de layout.tsx fija data-theme (guardado o del sistema) antes de pintar */
+:root[data-theme="dark"] {
+  & {
     --background: #0b1220;
     --foreground: #e2e8f0;
     --card: #111b2e;
@@ -170,6 +171,7 @@
     --border: #263247;
     --input: #263247;
     --ring: #fb923c;
+    color-scheme: dark;
   }
 }
 body { font-family: var(--font-sans); }
@@ -197,7 +199,38 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 
 /* Logo del LMS: variante clara u oscura según el esquema de color */
 .logo-on-dark { display: none; }
-@media (prefers-color-scheme: dark) {
-  .logo-on-light { display: none; }
-  .logo-on-dark { display: block; }
+:root[data-theme="dark"] .logo-on-light { display: none; }
+:root[data-theme="dark"] .logo-on-dark { display: block; }
+
+/* ===== Movimiento moderado: reveal, ondas, banda de clientes, tarjetas ===== */
+.reveal { transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1); }
+.reveal-hidden { opacity: 0; transform: translateY(14px); }
+
+@keyframes wave-drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-28px); } }
+.wave-line { animation: wave-drift 11s ease-in-out infinite; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 60s linear infinite; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+.service-card { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), border-color 200ms, box-shadow 200ms; }
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover { transform: translateY(-4px); border-color: var(--brand); box-shadow: 0 14px 32px -16px rgb(234 88 12 / 0.45); }
+  .service-card:hover .service-icon { transform: scale(1.06); }
+}
+.service-icon { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-line { animation: none; }
+  .reveal, .reveal-hidden { transition: none; opacity: 1; transform: none; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .marquee-dup { display: none; }
+}
+
+/* ===== Carrusel de fondo de la portada: fundido + zoom lento ===== */
+/* Saliente: conserva el zoom mientras se desvanece y se reinicia ya invisible. Entrante: zoom lento. */
+.hero-slide { opacity: 0; transform: scale(1); transition: opacity 1400ms ease-in-out, transform 0s linear 1400ms; }
+.hero-slide-active { opacity: 1; transform: scale(1.08); transition: opacity 1400ms ease-in-out, transform 9s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide, .hero-slide-active { transform: none; transition: opacity 1400ms ease-in-out; }
 }
