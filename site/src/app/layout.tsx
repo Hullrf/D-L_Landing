@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import "./globals.css";
+import { PrefsProvider } from "@/components/prefs";
+
+// Fija el tema antes de pintar para evitar parpadeo: elección guardada o preferencia del sistema.
+const themeScript = `try{var t=localStorage.getItem("dyl-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}`;
 
 const heading = Bricolage_Grotesque({
   variable: "--font-heading-face",
@@ -30,8 +34,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${heading.variable} ${body.variable} antialiased`}>
-      <body>{children}</body>
+    <html lang="es" suppressHydrationWarning className={`${heading.variable} ${body.variable} antialiased`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <PrefsProvider>{children}</PrefsProvider>
+      </body>
     </html>
   );
 }
