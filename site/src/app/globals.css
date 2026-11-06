@@ -234,3 +234,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 @media (prefers-reduced-motion: reduce) {
   .hero-slide, .hero-slide-active { transform: none; transition: opacity 1400ms ease-in-out; }
 }
+
+/* ===== Logos de clientes en tema oscuro: tarjeta oscura y logo invertido ===== */
+/* Los logos son imágenes con fondo blanco propio: se invierten y se mezclan con "screen" para que su fondo desaparezca. */
+:root[data-theme="dark"] .client-tile { background-color: var(--card); }
+:root[data-theme="dark"] .client-logo { filter: grayscale(1) invert(1) contrast(1.2); mix-blend-mode: screen; opacity: 0.85; }
+@media (hover: hover) and (pointer: fine) {
+  :root[data-theme="dark"] .client-logo:hover { filter: grayscale(1) invert(1) contrast(1.2); opacity: 1; }
+}
