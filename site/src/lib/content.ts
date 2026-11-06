@@ -55,6 +55,12 @@ const es = {
       { title: "Servicio", text: "Somos un equipo ágil y dinámico: respondemos rápido y nos adaptamos a su operación." },
     ],
   },
+  stats: [
+    { value: 10, suffix: "+", label: "años de experiencia" },
+    { value: 22, suffix: "", label: "organizaciones que confían en nosotros" },
+    { value: 6, suffix: "", label: "normas ISO en las que trabajamos" },
+    { value: 365, suffix: "", label: "días de acompañamiento al año" },
+  ],
   services: {
     title: "Nuestros servicios",
     intro: "Cada servicio responde a una norma. Cuéntenos cuál necesita su organización.",
@@ -149,6 +155,12 @@ const en: Content = {
       { title: "Service", text: "We are an agile, dynamic team: we respond quickly and adapt to your operation." },
     ],
   },
+  stats: [
+    { value: 10, suffix: "+", label: "years of experience" },
+    { value: 22, suffix: "", label: "organizations that trust us" },
+    { value: 6, suffix: "", label: "ISO standards we work with" },
+    { value: 365, suffix: "", label: "days a year of support" },
+  ],
   services: {
     title: "Our services",
     intro: "Each service maps to a standard. Tell us which one your organization needs.",

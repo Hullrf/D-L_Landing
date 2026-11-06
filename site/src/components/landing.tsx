@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { Check, Mail, MapPin, Phone, Clock, MessageCircle, GraduationCap, Moon, Sun } from "lucide-react";
+import { BadgeCheck, Check, Clock, FlaskConical, GraduationCap, HardHat, Leaf, LockKeyhole, Mail, MapPin, MessageCircle, Moon, Phone, School, Sun, Truck } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { WaveArt } from "@/components/art";
+import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
 import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, WHATSAPP, type Lang } from "@/lib/content";
 
@@ -105,31 +107,54 @@ function Header() {
 
 function Hero() {
   const { t } = usePrefs();
+  const btnBrand = `${btn} bg-[var(--brand)] text-[#0f172a] hover:bg-orange-400`;
+  const btnGhost = `${btn} border border-slate-500 text-white hover:bg-white/10`;
   return (
-    <section id="inicio" className="mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-14 md:grid-cols-[1.15fr_0.85fr] md:items-center md:pt-24">
-      <div>
-        <h1 className="font-display text-4xl font-bold leading-[1.05] text-foreground sm:text-5xl lg:text-6xl">{t.hero.title}</h1>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{t.hero.text}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#contacto" className={btnPrimary}>{t.hero.cta}</a>
-          <a href="#servicios" className={btnOutline}>{t.hero.ctaSecondary}</a>
+    <section id="inicio" className="relative overflow-hidden bg-[var(--graphite)] text-white">
+      <WaveArt className="[mask-image:linear-gradient(to_right,transparent_30%,#000_70%)]" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 pb-24 pt-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:pt-28">
+        <div>
+          <h1 className="font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">{t.hero.title}</h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">{t.hero.text}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#contacto" className={btnBrand}>{t.hero.cta}</a>
+            <a href="#servicios" className={btnGhost}>{t.hero.ctaSecondary}</a>
+          </div>
         </div>
+        <aside aria-label={t.hero.normsTitle} className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur-md">
+          <p className="font-display text-lg font-semibold">{t.hero.normsTitle}</p>
+          <ul className="mt-4 divide-y divide-white/10">
+            {t.hero.norms.map((n, i) => (
+              <li key={n} className="norm-item flex items-center gap-3 py-3" style={{ ["--i" as string]: i }}>
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[var(--brand)] text-[#0f172a]">
+                  <svg className="norm-check size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ ["--i" as string]: i }}>
+                    <path d="M4 12.5l5 5L20 6.5" />
+                  </svg>
+                </span>
+                <span className="text-base font-medium">{n}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
-      <aside aria-label={t.hero.normsTitle} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-        <p className="font-display text-lg font-semibold">{t.hero.normsTitle}</p>
-        <ul className="mt-4 divide-y divide-border">
-          {t.hero.norms.map((n, i) => (
-            <li key={n} className="norm-item flex items-center gap-3 py-3" style={{ ["--i" as string]: i }}>
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <svg className="norm-check size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ ["--i" as string]: i }}>
-                  <path d="M4 12.5l5 5L20 6.5" />
-                </svg>
-              </span>
-              <span className="text-base font-medium">{n}</span>
-            </li>
-          ))}
-        </ul>
-      </aside>
+    </section>
+  );
+}
+
+function Stats() {
+  const { t } = usePrefs();
+  return (
+    <section className="border-b border-border bg-card">
+      <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-5 py-12 md:grid-cols-4">
+        {t.stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 80} className="px-2 text-center md:border-l md:border-border md:first:border-l-0">
+            <dd className="font-display text-5xl font-bold text-primary sm:text-6xl">
+              <Counter value={s.value} suffix={s.suffix} />
+            </dd>
+            <dt className="mx-auto mt-2 max-w-[14rem] text-sm leading-snug text-muted-foreground">{s.label}</dt>
+          </Reveal>
+        ))}
+      </dl>
     </section>
   );
 }
@@ -153,33 +178,48 @@ function About() {
   );
 }
 
+const SERVICE_ICONS = [BadgeCheck, HardHat, Leaf, School, LockKeyhole, Truck, FlaskConical, GraduationCap];
+
 function Services() {
   const { t } = usePrefs();
   const last = t.services.items.length - 1;
   return (
     <section id="servicios" className="mx-auto max-w-6xl px-5 py-20">
-      <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.services.title}</h2>
-      <p className="mt-3 max-w-2xl text-lg text-muted-foreground">{t.services.intro}</p>
-      <ul className="mt-10 divide-y divide-border border-y border-border">
-        {t.services.items.map((s, i) => (
-          <li key={s.title} className="grid gap-2 py-6 md:grid-cols-[14rem_1fr_auto] md:items-center md:gap-8">
-            <p className="font-display text-base font-semibold text-primary">{s.norm}</p>
-            <div>
-              <h3 className="font-display text-xl font-semibold">{s.title}</h3>
-              <p className="mt-1 leading-relaxed text-muted-foreground">{s.text}</p>
-            </div>
-            <a
-              href={i === last ? LMS_URL : "#contacto"}
-              className={`text-sm font-semibold text-primary underline-offset-4 hover:underline ${focus}`}
-            >
-              {i === last
-                ? t.services.campusLink
-                : s.norm.startsWith("ISO")
-                  ? `${t.services.consult} ${s.norm.split(":")[0]}`
-                  : t.services.consultGeneric}
-            </a>
-          </li>
-        ))}
+      <Reveal>
+        <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.services.title}</h2>
+        <p className="mt-3 max-w-2xl text-lg text-muted-foreground">{t.services.intro}</p>
+      </Reveal>
+      <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {t.services.items.map((s, i) => {
+          const Icon = SERVICE_ICONS[i];
+          return (
+            <li key={s.title}>
+              <Reveal delay={(i % 4) * 70} className="h-full">
+                <article className="service-card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
+                  <div className="relative flex h-32 items-end justify-between overflow-hidden bg-[var(--graphite)] p-4">
+                    <WaveArt className="opacity-60" />
+                    <Icon className="service-icon relative size-12 text-[var(--brand)]" strokeWidth={1.5} aria-hidden />
+                    <span className="relative max-w-[9rem] rounded-full bg-white/10 px-3 py-1 text-right text-xs font-semibold leading-tight text-white">{s.norm}</span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="font-display text-lg font-semibold leading-snug">{s.title}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                    <a
+                      href={i === last ? LMS_URL : "#contacto"}
+                      className={`mt-4 text-sm font-semibold text-primary underline-offset-4 hover:underline ${focus}`}
+                    >
+                      {i === last
+                        ? t.services.campusLink
+                        : s.norm.startsWith("ISO")
+                          ? `${t.services.consult} ${s.norm.split(":")[0]}`
+                          : t.services.consultGeneric}
+                    </a>
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
@@ -187,16 +227,23 @@ function Services() {
 
 function Clients() {
   const { t } = usePrefs();
+  const logos = (dup: boolean) =>
+    CLIENT_LOGOS.map((f, i) => (
+      <li key={`${dup ? "d" : "o"}${f}`} className={`mx-2 flex h-24 w-40 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-3 ${dup ? "marquee-dup" : ""}`} aria-hidden={dup || undefined}>
+        <Image src={`/img/clientes/${f}`} alt={dup ? "" : t.clients.alt(i + 1)} width={160} height={80} className="client-logo max-h-full w-auto object-contain" />
+      </li>
+    ));
   return (
     <section id="clientes" className="border-y border-border bg-card">
-      <div className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.clients.title}</h2>
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-          {CLIENT_LOGOS.map((f, i) => (
-            <li key={f} className="flex h-24 items-center justify-center rounded-xl border border-border bg-white p-3">
-              <Image src={`/img/clientes/${f}`} alt={t.clients.alt(i + 1)} width={160} height={80} className="client-logo max-h-full w-auto object-contain" />
-            </li>
-          ))}
+      <div className="mx-auto max-w-6xl px-5 pt-20">
+        <Reveal>
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">{t.clients.title}</h2>
+        </Reveal>
+      </div>
+      <div className="marquee overflow-hidden py-12 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]">
+        <ul className="marquee-track">
+          {logos(false)}
+          {logos(true)}
         </ul>
       </div>
     </section>
@@ -247,8 +294,9 @@ function Contact() {
   const item = "flex items-start gap-3";
   const link = `underline-offset-4 hover:underline ${focus}`;
   return (
-    <section id="contacto" className="bg-[var(--graphite)] text-slate-100">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2">
+    <section id="contacto" className="relative overflow-hidden bg-[var(--graphite)] text-slate-100">
+      <WaveArt className="[mask-image:linear-gradient(to_bottom,transparent_55%,#000_95%)]" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-2">
         <div>
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">{t.contact.title}</h2>
           <p className="mt-4 max-w-md text-lg leading-relaxed text-slate-300">{t.contact.text}</p>
@@ -278,7 +326,7 @@ function Footer() {
   return (
     <footer className="bg-[var(--graphite)] text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-slate-800 px-5 py-10 md:flex-row md:items-center md:justify-between">
-        <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto" />
+        <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto self-center object-contain md:self-auto" />
         <nav aria-label={t.ui.footerNav} className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {t.nav.map((n) => (
             <a key={n.href} href={n.href} className="hover:text-white">{n.label}</a>
@@ -297,6 +345,7 @@ export default function Landing() {
       <Header />
       <main>
         <Hero />
+        <Stats />
         <About />
         <Services />
         <Clients />

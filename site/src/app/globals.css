@@ -201,3 +201,28 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 .logo-on-dark { display: none; }
 :root[data-theme="dark"] .logo-on-light { display: none; }
 :root[data-theme="dark"] .logo-on-dark { display: block; }
+
+/* ===== Movimiento moderado: reveal, ondas, banda de clientes, tarjetas ===== */
+.reveal { transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1); }
+.reveal-hidden { opacity: 0; transform: translateY(14px); }
+
+@keyframes wave-drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-28px); } }
+.wave-line { animation: wave-drift 11s ease-in-out infinite; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 60s linear infinite; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+.service-card { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), border-color 200ms, box-shadow 200ms; }
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover { transform: translateY(-4px); border-color: var(--brand); box-shadow: 0 14px 32px -16px rgb(234 88 12 / 0.45); }
+  .service-card:hover .service-icon { transform: scale(1.06); }
+}
+.service-icon { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-line { animation: none; }
+  .reveal, .reveal-hidden { transition: none; opacity: 1; transform: none; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .marquee-dup { display: none; }
+}
