@@ -295,7 +295,7 @@ function Contact() {
   const link = `underline-offset-4 hover:underline ${focus}`;
   return (
     <section id="contacto" className="relative overflow-hidden bg-[var(--graphite)] text-slate-100">
-      <WaveArt />
+      <WaveArt className="[mask-image:linear-gradient(to_bottom,transparent_55%,#000_95%)]" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-2">
         <div>
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">{t.contact.title}</h2>
