@@ -229,7 +229,7 @@ function Footer() {
           <a href={LMS_URL} className="hover:text-white">Campus virtual</a>
         </nav>
         <p className="text-sm">
-          © 2026 D&amp;L Quality Consulting. Sitio desarrollado por David Santiago.
+          © 2026 D&amp;L Quality Consulting. Sitio desarrollado por David Santiago Rodríguez Cardona.
         </p>
       </div>
     </footer>
