@@ -231,7 +231,7 @@ function Clients() {
   const { t } = usePrefs();
   const logos = (dup: boolean) =>
     CLIENT_LOGOS.map((f, i) => (
-      <li key={`${dup ? "d" : "o"}${f}`} className={`mx-2 flex h-24 w-40 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-3 ${dup ? "marquee-dup" : ""}`} aria-hidden={dup || undefined}>
+      <li key={`${dup ? "d" : "o"}${f}`} className={`client-tile mx-2 flex h-24 w-40 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-3 ${dup ? "marquee-dup" : ""}`} aria-hidden={dup || undefined}>
         <Image src={`/img/clientes/${f}`} alt={dup ? "" : t.clients.alt(i + 1)} width={160} height={80} className="client-logo max-h-full w-auto object-contain" />
       </li>
     ));
