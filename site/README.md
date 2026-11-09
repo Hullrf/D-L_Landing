@@ -39,7 +39,7 @@ npm ci
 STATIC_EXPORT=1 NEXT_PUBLIC_LMS_URL=https://<dominio-del-lms> npm run build   # genera site/out/
 ```
 
-Luego se sube el contenido de `site/out/` a la raíz del sitio (Administrador de archivos de hPanel, o el despliegue por carpeta). `NEXT_PUBLIC_LMS_URL` se incorpora al compilar: hay que recompilar al cambiar de dominio. Sin `STATIC_EXPORT=1` el proyecto se compila en modo servidor, como siempre.
+**Autodeploy:** cada push a `main` ejecuta `.github/workflows/build-static.yml`, que compila con `STATIC_EXPORT=1` y sube `site/out/` por rsync/SSH al `public_html` del sitio (secretos `HOSTINGER_*` del repo; sin ellos el job compila y no despliega). El build en servidor de Hostinger está desactivado a propósito. Para un deploy manual, compila como arriba y sube el contenido de `site/out/` a la raíz del sitio (hPanel o despliegue por carpeta). `NEXT_PUBLIC_LMS_URL` se incorpora al compilar: hay que recompilar al cambiar de dominio. Sin `STATIC_EXPORT=1` el proyecto se compila en modo servidor, como siempre.
 
 ## Deploy on Vercel
 
