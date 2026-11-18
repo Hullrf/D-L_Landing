@@ -5,6 +5,13 @@ export const PHONE_HREF = "tel:+573103491201";
 export const WHATSAPP = "https://api.whatsapp.com/send/?phone=573505137069&type=phone_number&app_absent=0";
 export const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 export const EMAIL = "contacto@dylqualityconsulting.com";
+// Redes de la empresa (las mismas que enlazaba la web anterior).
+export const SOCIAL = [
+  { name: "Facebook", href: "https://www.facebook.com/dylqualityconsultingltda/" },
+  { name: "Instagram", href: "https://www.instagram.com/DyL_QualityConsulting/" },
+  { name: "YouTube", href: "https://www.youtube.com/channel/UCBuqCgq3oo71Q_liif9FkUQ/" },
+  { name: "Messenger", href: "https://m.me/100492021464301" },
+] as const;
 // encodeURIComponent (no "+") porque los clientes de correo no traducen "+" a espacio.
 export const mailtoFor = (subject: string, body: string) =>
   `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -47,6 +54,7 @@ const es = {
     campus: "Campus virtual",
     mainNav: "Principal",
     footerNav: "Pie de página",
+    social: "Redes sociales",
     langLabel: "Idioma",
     themeToLight: "Cambiar a tema claro",
     themeToDark: "Cambiar a tema oscuro",
@@ -269,6 +277,7 @@ const en: Content = {
     campus: "Virtual campus",
     mainNav: "Main",
     footerNav: "Footer",
+    social: "Social media",
     langLabel: "Language",
     themeToLight: "Switch to light theme",
     themeToDark: "Switch to dark theme",

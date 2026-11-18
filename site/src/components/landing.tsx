@@ -13,6 +13,7 @@ import {
 import { WaveArt } from "@/components/art";
 import EmailMenu from "@/components/email-menu";
 import HeroCarousel from "@/components/hero-carousel";
+import SocialLinks from "@/components/social-links";
 import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
 import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, mailtoFor, whatsappFor, type Lang } from "@/lib/content";
@@ -338,12 +339,15 @@ export function Footer() {
     <footer className="bg-[var(--graphite)] text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-slate-800 px-5 py-10 md:flex-row md:items-center md:justify-between">
         <Image src="/img/logo-dark.png" alt="D&L Quality Consulting" width={720} height={639} className="h-32 w-auto self-center object-contain md:self-auto" />
-        <nav aria-label={t.ui.footerNav} className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {t.nav.map((n) => (
-            <a key={n.href} href={n.href} className="hover:text-white">{n.label}</a>
-          ))}
-          <a href={LMS_URL} className="hover:text-white">{t.ui.campus}</a>
-        </nav>
+        <div className="flex flex-col gap-5">
+          <nav aria-label={t.ui.footerNav} className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {t.nav.map((n) => (
+              <a key={n.href} href={n.href} className="hover:text-white">{n.label}</a>
+            ))}
+            <a href={LMS_URL} className="hover:text-white">{t.ui.campus}</a>
+          </nav>
+          <SocialLinks label={t.ui.social} />
+        </div>
         <p className="text-sm">{t.footer.credit}</p>
       </div>
     </footer>
