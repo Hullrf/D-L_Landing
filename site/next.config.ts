@@ -5,9 +5,10 @@ import type { NextConfig } from "next";
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 
 const nextConfig: NextConfig = {
+  // trailingSlash: genera cursos/index.html para que Apache/LiteSpeed sirva /cursos/ sin reglas extra.
   // PPR no es compatible con `output: "export"`: solo se activa en modo servidor.
   ...(isStaticExport
-    ? { output: "export", images: { unoptimized: true } }
+    ? { output: "export", trailingSlash: true, images: { unoptimized: true } }
     : { cacheComponents: true, partialPrefetching: true }),
   turbopack: {
     rules: {

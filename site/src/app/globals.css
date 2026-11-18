@@ -242,3 +242,15 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 @media (hover: hover) and (pointer: fine) {
   :root[data-theme="dark"] .client-logo:hover { filter: grayscale(1) invert(1) contrast(1.2); opacity: 1; }
 }
+
+/* ===== Ficha de curso (<dialog> nativo): aparece con fundido + escala; fondo sin scroll ===== */
+html:has(dialog[open]) { overflow: hidden; }
+.course-dialog { opacity: 0; transform: scale(0.96) translateY(8px); transition: opacity 220ms cubic-bezier(0.23, 1, 0.32, 1), transform 220ms cubic-bezier(0.23, 1, 0.32, 1), overlay 220ms allow-discrete, display 220ms allow-discrete; }
+.course-dialog[open] { opacity: 1; transform: none; }
+@starting-style { .course-dialog[open] { opacity: 0; transform: scale(0.96) translateY(8px); } }
+.course-dialog::backdrop { opacity: 0; transition: opacity 220ms ease-out, overlay 220ms allow-discrete, display 220ms allow-discrete; }
+.course-dialog[open]::backdrop { opacity: 1; }
+@starting-style { .course-dialog[open]::backdrop { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .course-dialog, .course-dialog::backdrop { transition: none; transform: none; }
+}
