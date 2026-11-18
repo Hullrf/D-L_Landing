@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BadgeCheck, Check, Clock, FlaskConical, GraduationCap, HardHat, Leaf, LockKeyhole, Mail, MapPin, MessageCircle, Moon, Phone, School, Sun, Truck } from "lucide-react";
 import {
   Accordion,
@@ -14,9 +16,9 @@ import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
 import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, WHATSAPP, type Lang } from "@/lib/content";
 
-const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]";
-const btn = `btn-press inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-150 ${focus}`;
-const btnPrimary = `${btn} bg-primary text-primary-foreground hover:bg-[#9a3412]`;
+export const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]";
+export const btn = `btn-press inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-150 ${focus}`;
+export const btnPrimary = `${btn} bg-primary text-primary-foreground hover:bg-[#9a3412]`;
 const btnOutline = `${btn} border border-border bg-card text-foreground hover:bg-secondary`;
 
 function LangSwitch() {
@@ -57,21 +59,23 @@ function ThemeToggle() {
   );
 }
 
-function Header() {
+export function Header() {
   const { t } = usePrefs();
+  const path = usePathname();
+  const current = (href: string) => (href.replace(/\/$/, "") === path.replace(/\/$/, "") ? "page" : undefined);
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5">
-        <a href="#inicio" className={`flex shrink-0 items-center gap-2.5 ${focus}`} aria-label={t.ui.homeLabel}>
+        <Link href="/#inicio" className={`flex shrink-0 items-center gap-2.5 ${focus}`} aria-label={t.ui.homeLabel}>
           <Image src="/img/icon-light.png" alt="" width={256} height={256} className="logo-on-light size-11" priority />
           <Image src="/img/icon-dark.png" alt="" width={256} height={256} className="logo-on-dark size-11" priority />
           <span className="font-display text-lg font-bold leading-tight max-[430px]:hidden">
             D&amp;L <span className="block text-sm font-semibold text-muted-foreground">Quality Consulting</span>
           </span>
-        </a>
+        </Link>
         <nav aria-label={t.ui.mainNav} className="hidden items-center gap-6 lg:flex">
           {t.nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            <a key={n.href} href={n.href} aria-current={current(n.href)} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:text-foreground aria-[current=page]:underline aria-[current=page]:decoration-[var(--brand)] aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8">
               {n.label}
             </a>
           ))}
@@ -91,7 +95,7 @@ function Header() {
             </summary>
             <div className="absolute right-0 mt-2 w-56 rounded-xl border border-border bg-card p-2 shadow-lg">
               {t.nav.map((n) => (
-                <a key={n.href} href={n.href} className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-secondary">
+                <a key={n.href} href={n.href} aria-current={current(n.href)} className="block rounded-lg aria-[current=page]:bg-secondary px-3 py-3 text-base font-medium hover:bg-secondary">
                   {n.label}
                 </a>
               ))}
@@ -207,7 +211,7 @@ function Services() {
                     <h3 className="font-display text-lg font-semibold leading-snug">{s.title}</h3>
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
                     <a
-                      href={i === last ? LMS_URL : "#contacto"}
+                      href={i === last ? "/cursos/" : "#contacto"}
                       className={`mt-4 text-sm font-semibold text-primary underline-offset-4 hover:underline ${focus}`}
                     >
                       {i === last
@@ -323,7 +327,7 @@ function Contact() {
   );
 }
 
-function Footer() {
+export function Footer() {
   const { t } = usePrefs();
   return (
     <footer className="bg-[var(--graphite)] text-slate-400">
