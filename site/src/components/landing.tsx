@@ -187,6 +187,8 @@ function About() {
 }
 
 const SERVICE_ICONS = [BadgeCheck, HardHat, Leaf, School, LockKeyhole, Truck, FlaskConical, GraduationCap];
+// Fotos en public/img/servicios, en el mismo orden que t.services.items.
+const SERVICE_IMAGES = ["iso-9001", "iso-45001", "iso-14001", "ntc-etdh", "iso-27001", "iso-28000", "iso-17025", "formacion"];
 
 function Services() {
   const { t } = usePrefs();
@@ -204,8 +206,16 @@ function Services() {
             <li key={s.title}>
               <Reveal delay={(i % 4) * 70} className="h-full">
                 <article className="service-card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
-                  <div className="relative flex h-32 items-end justify-between overflow-hidden bg-[var(--graphite)] p-4">
-                    <WaveArt className="opacity-60" />
+                  <div className="relative flex aspect-[2/1] items-end justify-between overflow-hidden bg-[var(--graphite)] p-4">
+                    <Image
+                      src={`/img/servicios/${SERVICE_IMAGES[i]}.webp`}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                    {/* Degradado: asegura contraste del ícono y la etiqueta sobre la foto */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/30 to-transparent" />
                     <Icon className="service-icon relative size-12 text-[var(--brand)]" strokeWidth={1.5} aria-hidden />
                     <span className="relative max-w-[9rem] rounded-full bg-white/10 px-3 py-1 text-right text-xs font-semibold leading-tight text-white">{s.norm}</span>
                   </div>
