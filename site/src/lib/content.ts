@@ -1,8 +1,13 @@
 export const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? "https://dyllms-production.up.railway.app";
 export const PHONE = "+57 310 349 1201";
 export const PHONE_HREF = "tel:+573103491201";
-export const WHATSAPP = "https://wa.me/573103491201";
+// whatsappFor() le agrega el mensaje predeterminado de cada botón.
+export const WHATSAPP = "https://api.whatsapp.com/send/?phone=573505137069&type=phone_number&app_absent=0";
+export const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 export const EMAIL = "contacto@dylqualityconsulting.com";
+// encodeURIComponent (no "+") porque los clientes de correo no traducen "+" a espacio.
+export const mailtoFor = (subject: string, body: string) =>
+  `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 export type Lang = "es" | "en";
 
@@ -14,7 +19,7 @@ export const CLIENT_LOGOS: string[] = [
 ];
 
 // Programas de formación: portada en public/cursos/img/<slug>.webp y brochure en public/cursos/pdf/<slug>.pdf.
-// Horas tomadas de cada brochure (Metrología no las trae: 120 h, las del LMS).
+// Horas según la tabla oficial de D&L "Programas de Formación por Competencias" (2026-11-18).
 export type CourseCategory = "procesos" | "datos" | "gestion" | "laboratorios";
 export const CATEGORY_COLORS: Record<CourseCategory, string> = {
   procesos: "#ea580c",
@@ -27,9 +32,9 @@ export const COURSES: { slug: string; hours: number; category: CourseCategory }[
   { slug: "lean-six-sigma", hours: 60, category: "procesos" },
   { slug: "lean-manufacturing", hours: 60, category: "procesos" },
   { slug: "flexsim", hours: 120, category: "procesos" },
-  { slug: "metrologia-avanzada", hours: 120, category: "laboratorios" },
+  { slug: "metrologia-avanzada", hours: 60, category: "laboratorios" },
   { slug: "analisis-de-datos", hours: 80, category: "datos" },
-  { slug: "excel", hours: 60, category: "datos" },
+  { slug: "excel", hours: 80, category: "datos" },
 ];
 
 type CourseText = { title: string; summary: string; description: string; modules: string[]; audience: string[] };
@@ -118,6 +123,7 @@ const es = {
     ctaTitle: "¿Quiere formar a su equipo?",
     ctaText: "Diseñamos programas a la medida de su organización. Escríbanos y le contamos fechas, valores y modalidades para grupos.",
     ctaButton: "Escribir por WhatsApp",
+    ctaMessage: "Hola, quiero información sobre los programas de formación para mi equipo.",
     categories: {
       procesos: "Mejora de procesos",
       datos: "Datos y productividad",
@@ -189,7 +195,7 @@ const es = {
         audience: ["Técnicos y profesionales de laboratorios de ensayo y calibración", "Equipos de calidad, metrología y control"],
       },
       "analisis-de-datos": {
-        title: "Programa de formación en análisis de datos",
+        title: "Análisis de datos: de Excel a Power BI",
         summary: "Cuatro niveles que van de Excel a Power BI avanzado: tablas dinámicas, Power Query, modelado y DAX.",
         description: "Un itinerario completo para convertirse en profesional del análisis de datos. Cada nivel combina teoría, ejercicios prácticos y evaluaciones continuas, con un examen final integrador.",
         modules: [
@@ -236,7 +242,14 @@ const es = {
     title: "Certifique su organización con nosotros",
     text: "Cuéntenos qué norma necesita y le respondemos en horario de oficina.",
     whatsapp: "Escribir por WhatsApp",
+    whatsappMessage: "Hola, quiero información sobre la asesoría para mi organización.",
     email: "Enviar un correo",
+    emailSubject: "Solicitud de información",
+    gmail: "Gmail",
+    outlook: "Outlook",
+    app: "Aplicación de correo",
+    copy: "Copiar dirección",
+    copied: "Dirección copiada",
     address: "Calle 143 No. 46-55, Bogotá D.C.",
     hours: "Lunes a viernes, 8:00 a. m. a 5:00 p. m.",
     coverage: "Cobertura en todo Colombia.",
@@ -332,6 +345,7 @@ const en: Content = {
     ctaTitle: "Want to train your team?",
     ctaText: "We design programs tailored to your organization. Message us for dates, pricing and group options.",
     ctaButton: "Message us on WhatsApp",
+    ctaMessage: "Hello, I would like information about training programs for my team.",
     categories: {
       procesos: "Process improvement",
       datos: "Data and productivity",
@@ -403,7 +417,7 @@ const en: Content = {
         audience: ["Testing and calibration laboratory staff", "Quality, metrology and control teams"],
       },
       "analisis-de-datos": {
-        title: "Data analysis training program",
+        title: "Data analysis: from Excel to Power BI",
         summary: "Four levels from Excel to advanced Power BI: pivot tables, Power Query, data modeling and DAX.",
         description: "A complete path to becoming a data analysis professional. Each level combines theory, hands-on exercises and continuous assessment, with a final capstone exam.",
         modules: [
@@ -450,7 +464,14 @@ const en: Content = {
     title: "Certify your organization with us",
     text: "Tell us which standard you need and we will reply during office hours.",
     whatsapp: "Message us on WhatsApp",
+    whatsappMessage: "Hello, I would like information about consulting for my organization.",
     email: "Send an email",
+    emailSubject: "Information request",
+    gmail: "Gmail",
+    outlook: "Outlook",
+    app: "Email app",
+    copy: "Copy address",
+    copied: "Address copied",
     address: "Calle 143 No. 46-55, Bogotá D.C., Colombia",
     hours: "Monday to Friday, 8:00 a.m. to 5:00 p.m. (Colombia time)",
     coverage: "Nationwide coverage across Colombia.",
