@@ -11,10 +11,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { WaveArt } from "@/components/art";
+import EmailMenu from "@/components/email-menu";
 import HeroCarousel from "@/components/hero-carousel";
 import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
-import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, whatsappFor, type Lang } from "@/lib/content";
+import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, mailtoFor, whatsappFor, type Lang } from "@/lib/content";
 
 export const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]";
 export const btn = `btn-press inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-150 ${focus}`;
@@ -299,6 +300,7 @@ function Contact() {
   const { t } = usePrefs();
   const item = "flex items-start gap-3";
   const link = `underline-offset-4 hover:underline ${focus}`;
+  const mailto = mailtoFor(t.contact.emailSubject, t.contact.whatsappMessage);
   return (
     <section id="contacto" className="relative overflow-hidden bg-[var(--graphite)] text-slate-100">
       <WaveArt className="[mask-image:linear-gradient(to_bottom,transparent_55%,#000_95%)]" />
@@ -310,14 +312,17 @@ function Contact() {
             <a href={whatsappFor(t.contact.whatsappMessage)} className={`${btn} bg-[var(--brand)] text-[#0f172a] hover:bg-orange-400`}>
               <MessageCircle className="size-5" aria-hidden /> {t.contact.whatsapp}
             </a>
-            <a href={`mailto:${EMAIL}`} className={`${btn} border border-slate-600 text-white hover:bg-slate-800`}>
-              {t.contact.email}
-            </a>
+            <EmailMenu
+              className={`${btn} border border-slate-600 text-white hover:bg-slate-800`}
+              subject={t.contact.emailSubject}
+              body={t.contact.whatsappMessage}
+              t={t.contact}
+            />
           </div>
         </div>
         <ul className="space-y-5 text-base">
           <li className={item}><Phone className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><a className={link} href={PHONE_HREF}>{PHONE}</a></li>
-          <li className={item}><Mail className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><a className={link} href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          <li className={item}><Mail className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><a className={link} href={mailto}>{EMAIL}</a></li>
           <li className={item}><MapPin className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><span>{t.contact.address}</span></li>
           <li className={item}><Clock className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><span>{t.contact.hours}</span></li>
           <li className={item}><Check className="mt-1 size-5 shrink-0 text-orange-400" aria-hidden /><span>{t.contact.coverage}</span></li>

@@ -5,6 +5,9 @@ export const PHONE_HREF = "tel:+573103491201";
 export const WHATSAPP = "https://api.whatsapp.com/send/?phone=573505137069&type=phone_number&app_absent=0";
 export const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 export const EMAIL = "contacto@dylqualityconsulting.com";
+// encodeURIComponent (no "+") porque los clientes de correo no traducen "+" a espacio.
+export const mailtoFor = (subject: string, body: string) =>
+  `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 export type Lang = "es" | "en";
 
@@ -241,6 +244,12 @@ const es = {
     whatsapp: "Escribir por WhatsApp",
     whatsappMessage: "Hola, quiero información sobre la asesoría para mi organización.",
     email: "Enviar un correo",
+    emailSubject: "Solicitud de información",
+    gmail: "Gmail",
+    outlook: "Outlook",
+    app: "Aplicación de correo",
+    copy: "Copiar dirección",
+    copied: "Dirección copiada",
     address: "Calle 143 No. 46-55, Bogotá D.C.",
     hours: "Lunes a viernes, 8:00 a. m. a 5:00 p. m.",
     coverage: "Cobertura en todo Colombia.",
@@ -457,6 +466,12 @@ const en: Content = {
     whatsapp: "Message us on WhatsApp",
     whatsappMessage: "Hello, I would like information about consulting for my organization.",
     email: "Send an email",
+    emailSubject: "Information request",
+    gmail: "Gmail",
+    outlook: "Outlook",
+    app: "Email app",
+    copy: "Copy address",
+    copied: "Address copied",
     address: "Calle 143 No. 46-55, Bogotá D.C., Colombia",
     hours: "Monday to Friday, 8:00 a.m. to 5:00 p.m. (Colombia time)",
     coverage: "Nationwide coverage across Colombia.",
