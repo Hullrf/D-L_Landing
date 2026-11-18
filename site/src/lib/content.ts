@@ -14,7 +14,7 @@ export const CLIENT_LOGOS: string[] = [
 ];
 
 // Programas de formación: portada en public/cursos/img/<slug>.webp y brochure en public/cursos/pdf/<slug>.pdf.
-// Horas tomadas de cada brochure (Metrología no las trae: 120 h, las del LMS).
+// Horas según la tabla oficial de D&L "Programas de Formación por Competencias" (2026-11-18).
 export type CourseCategory = "procesos" | "datos" | "gestion" | "laboratorios";
 export const CATEGORY_COLORS: Record<CourseCategory, string> = {
   procesos: "#ea580c",
@@ -27,9 +27,9 @@ export const COURSES: { slug: string; hours: number; category: CourseCategory }[
   { slug: "lean-six-sigma", hours: 60, category: "procesos" },
   { slug: "lean-manufacturing", hours: 60, category: "procesos" },
   { slug: "flexsim", hours: 120, category: "procesos" },
-  { slug: "metrologia-avanzada", hours: 120, category: "laboratorios" },
+  { slug: "metrologia-avanzada", hours: 60, category: "laboratorios" },
   { slug: "analisis-de-datos", hours: 80, category: "datos" },
-  { slug: "excel", hours: 60, category: "datos" },
+  { slug: "excel", hours: 80, category: "datos" },
 ];
 
 type CourseText = { title: string; summary: string; description: string; modules: string[]; audience: string[] };
