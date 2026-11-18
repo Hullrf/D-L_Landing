@@ -1,7 +1,8 @@
 export const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? "https://dyllms-production.up.railway.app";
 export const PHONE = "+57 310 349 1201";
 export const PHONE_HREF = "tel:+573103491201";
-export const WHATSAPP = "https://wa.me/573103491201";
+// Sin texto abre el chat vacío; whatsappFor() (en courses.tsx) le agrega el mensaje.
+export const WHATSAPP = "https://api.whatsapp.com/send/?phone=573505137069&type=phone_number&app_absent=0";
 export const EMAIL = "contacto@dylqualityconsulting.com";
 
 export type Lang = "es" | "en";

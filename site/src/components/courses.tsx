@@ -10,7 +10,7 @@ import { usePrefs } from "@/components/prefs";
 import { CATEGORY_COLORS, COURSES, WHATSAPP } from "@/lib/content";
 
 const cover = (slug: string) => `/cursos/img/${slug}.webp`;
-const whatsappFor = (text: string) => `${WHATSAPP}?text=${encodeURIComponent(text)}`;
+const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 
 function CourseDialog({ slug, dialogRef }: { slug: string | null; dialogRef: React.RefObject<HTMLDialogElement | null> }) {
   const { t } = usePrefs();
@@ -106,12 +106,13 @@ function CourseGrid() {
           return (
             <li key={m.slug}>
               <Reveal delay={(i % 3) * 70} className="h-full">
+                <article className="service-card flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
                 <button
                   type="button"
                   onClick={() => open(m.slug)}
                   aria-haspopup="dialog"
                   aria-label={c.open(item.title)}
-                  className={`service-card group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-border bg-card text-left ${focus}`}
+                  className={`group flex w-full flex-1 flex-col text-left focus-visible:-outline-offset-2 ${focus}`}
                 >
                   <span className="relative block h-40 w-full overflow-hidden bg-[var(--graphite)]">
                     <Image src={cover(m.slug)} alt="" fill sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw" className="object-cover" />
@@ -129,6 +130,18 @@ function CourseGrid() {
                     <span className="mt-4 text-sm font-semibold text-primary group-hover:underline group-hover:underline-offset-4">{c.details}</span>
                   </span>
                 </button>
+                <div className="px-5 pb-5">
+                  <a
+                    href={whatsappFor(c.askMessage(item.title))}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`${c.ask}: ${item.title}`}
+                    className={`btn-press inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold transition-colors duration-150 hover:bg-secondary ${focus}`}
+                  >
+                    <MessageCircle className="size-4 text-[#16a34a]" aria-hidden /> {c.ask}
+                  </a>
+                </div>
+                </article>
               </Reveal>
             </li>
           );
