@@ -1,8 +1,9 @@
 export const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? "https://dyllms-production.up.railway.app";
 export const PHONE = "+57 310 349 1201";
 export const PHONE_HREF = "tel:+573103491201";
-// Sin texto abre el chat vacío; whatsappFor() (en courses.tsx) le agrega el mensaje.
+// whatsappFor() le agrega el mensaje predeterminado de cada botón.
 export const WHATSAPP = "https://api.whatsapp.com/send/?phone=573505137069&type=phone_number&app_absent=0";
+export const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 export const EMAIL = "contacto@dylqualityconsulting.com";
 
 export type Lang = "es" | "en";
@@ -119,6 +120,7 @@ const es = {
     ctaTitle: "¿Quiere formar a su equipo?",
     ctaText: "Diseñamos programas a la medida de su organización. Escríbanos y le contamos fechas, valores y modalidades para grupos.",
     ctaButton: "Escribir por WhatsApp",
+    ctaMessage: "Hola, quiero información sobre los programas de formación para mi equipo.",
     categories: {
       procesos: "Mejora de procesos",
       datos: "Datos y productividad",
@@ -190,7 +192,7 @@ const es = {
         audience: ["Técnicos y profesionales de laboratorios de ensayo y calibración", "Equipos de calidad, metrología y control"],
       },
       "analisis-de-datos": {
-        title: "Programa de formación en análisis de datos",
+        title: "Análisis de datos: de Excel a Power BI",
         summary: "Cuatro niveles que van de Excel a Power BI avanzado: tablas dinámicas, Power Query, modelado y DAX.",
         description: "Un itinerario completo para convertirse en profesional del análisis de datos. Cada nivel combina teoría, ejercicios prácticos y evaluaciones continuas, con un examen final integrador.",
         modules: [
@@ -237,6 +239,7 @@ const es = {
     title: "Certifique su organización con nosotros",
     text: "Cuéntenos qué norma necesita y le respondemos en horario de oficina.",
     whatsapp: "Escribir por WhatsApp",
+    whatsappMessage: "Hola, quiero información sobre la asesoría para mi organización.",
     email: "Enviar un correo",
     address: "Calle 143 No. 46-55, Bogotá D.C.",
     hours: "Lunes a viernes, 8:00 a. m. a 5:00 p. m.",
@@ -333,6 +336,7 @@ const en: Content = {
     ctaTitle: "Want to train your team?",
     ctaText: "We design programs tailored to your organization. Message us for dates, pricing and group options.",
     ctaButton: "Message us on WhatsApp",
+    ctaMessage: "Hello, I would like information about training programs for my team.",
     categories: {
       procesos: "Process improvement",
       datos: "Data and productivity",
@@ -404,7 +408,7 @@ const en: Content = {
         audience: ["Testing and calibration laboratory staff", "Quality, metrology and control teams"],
       },
       "analisis-de-datos": {
-        title: "Data analysis training program",
+        title: "Data analysis: from Excel to Power BI",
         summary: "Four levels from Excel to advanced Power BI: pivot tables, Power Query, data modeling and DAX.",
         description: "A complete path to becoming a data analysis professional. Each level combines theory, hands-on exercises and continuous assessment, with a final capstone exam.",
         modules: [
@@ -451,6 +455,7 @@ const en: Content = {
     title: "Certify your organization with us",
     text: "Tell us which standard you need and we will reply during office hours.",
     whatsapp: "Message us on WhatsApp",
+    whatsappMessage: "Hello, I would like information about consulting for my organization.",
     email: "Send an email",
     address: "Calle 143 No. 46-55, Bogotá D.C., Colombia",
     hours: "Monday to Friday, 8:00 a.m. to 5:00 p.m. (Colombia time)",

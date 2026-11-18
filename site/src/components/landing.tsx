@@ -14,7 +14,7 @@ import { WaveArt } from "@/components/art";
 import HeroCarousel from "@/components/hero-carousel";
 import { Counter, Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
-import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, WHATSAPP, type Lang } from "@/lib/content";
+import { CLIENT_LOGOS, EMAIL, LMS_URL, PHONE, PHONE_HREF, whatsappFor, type Lang } from "@/lib/content";
 
 export const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]";
 export const btn = `btn-press inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-150 ${focus}`;
@@ -307,7 +307,7 @@ function Contact() {
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">{t.contact.title}</h2>
           <p className="mt-4 max-w-md text-lg leading-relaxed text-slate-300">{t.contact.text}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={WHATSAPP} className={`${btn} bg-[var(--brand)] text-[#0f172a] hover:bg-orange-400`}>
+            <a href={whatsappFor(t.contact.whatsappMessage)} className={`${btn} bg-[var(--brand)] text-[#0f172a] hover:bg-orange-400`}>
               <MessageCircle className="size-5" aria-hidden /> {t.contact.whatsapp}
             </a>
             <a href={`mailto:${EMAIL}`} className={`${btn} border border-slate-600 text-white hover:bg-slate-800`}>

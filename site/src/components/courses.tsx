@@ -7,10 +7,9 @@ import { WaveArt } from "@/components/art";
 import { btn, focus, Footer, Header } from "@/components/landing";
 import { Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
-import { CATEGORY_COLORS, COURSES, WHATSAPP } from "@/lib/content";
+import { CATEGORY_COLORS, COURSES, whatsappFor } from "@/lib/content";
 
 const cover = (slug: string) => `/cursos/img/${slug}.webp`;
-const whatsappFor = (text: string) => `${WHATSAPP}&text=${encodeURIComponent(text)}`;
 
 function CourseDialog({ slug, dialogRef }: { slug: string | null; dialogRef: React.RefObject<HTMLDialogElement | null> }) {
   const { t } = usePrefs();
@@ -175,7 +174,7 @@ export default function Courses() {
               <h2 className="font-display text-2xl font-bold text-accent-foreground sm:text-3xl">{c.ctaTitle}</h2>
               <p className="mt-2 max-w-xl leading-relaxed text-foreground/80">{c.ctaText}</p>
             </div>
-            <a href={WHATSAPP} target="_blank" rel="noopener" className={`${btn} shrink-0 bg-primary text-primary-foreground hover:bg-[#9a3412]`}>
+            <a href={whatsappFor(c.ctaMessage)} target="_blank" rel="noopener" className={`${btn} shrink-0 bg-primary text-primary-foreground hover:bg-[#9a3412]`}>
               <MessageCircle className="size-5" aria-hidden /> {c.ctaButton}
             </a>
           </div>
