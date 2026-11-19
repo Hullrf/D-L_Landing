@@ -25,7 +25,7 @@ export const CLIENT_LOGOS: string[] = [
   "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg",
 ];
 
-// Programas de formación: portada en public/cursos/img/<slug>.webp y brochure en public/cursos/pdf/<slug>.pdf.
+// Programas de formación: portada en public/cursos/img/v2/<slug>.webp (carpeta versionada: el CDN de Hostinger cachea 7 días; al cambiar portadas, subir a v3) y brochure en public/cursos/pdf/<slug>.pdf.
 // Horas según la tabla oficial de D&L "Programas de Formación por Competencias" (2026-11-18).
 export type CourseCategory = "procesos" | "datos" | "gestion" | "laboratorios";
 export const CATEGORY_COLORS: Record<CourseCategory, string> = {

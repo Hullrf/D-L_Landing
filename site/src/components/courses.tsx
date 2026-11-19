@@ -9,7 +9,7 @@ import { Reveal } from "@/components/motion";
 import { usePrefs } from "@/components/prefs";
 import { CATEGORY_COLORS, COURSES, whatsappFor } from "@/lib/content";
 
-const cover = (slug: string) => `/cursos/img/${slug}.webp`;
+const cover = (slug: string) => `/cursos/img/v2/${slug}.webp`;
 
 function CourseDialog({ slug, dialogRef }: { slug: string | null; dialogRef: React.RefObject<HTMLDialogElement | null> }) {
   const { t } = usePrefs();
