@@ -1,4 +1,4 @@
-export const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? "https://dyllms-production.up.railway.app";
+export const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? "https://campus.dylqualityconsulting.com";
 export const PHONE = "+57 310 349 1201";
 export const PHONE_HREF = "tel:+573103491201";
 // whatsappFor() le agrega el mensaje predeterminado de cada botón.
